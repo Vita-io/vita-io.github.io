@@ -1,0 +1,11 @@
+# Site settings
+title: Vita.io
+email: info@vita.io
+description: > # Homepage of Vita.IO
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://vita.io" # the base hostname & protocol for your site
+twitter_username: VitaAnalytics
+github_username:  vita-io
+
+# Build settings
+markdown: kramdown
