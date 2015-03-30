@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+      "folder_exclude_patterns": [".sass-cache", "bower_components", "node_modules", "_site"]
+		}
+	]
+}
