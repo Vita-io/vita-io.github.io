@@ -5,7 +5,9 @@
   "dependencies": {
     "foundation": "zurb/bower-foundation",
     "skrollr": "Prinzhorn/skrollr",
-    "countUp": "inorganik/countUp.js"
+    "countUp": "inorganik/countUp.js",
+    "closure-compiler": "http://dl.google.com/closure-compiler/compiler-latest.zip",
+    "jquery": "jquery/jquery"
   },
   "ignore": [
     "**/.*",
