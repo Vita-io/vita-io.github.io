@@ -1,3 +1,10 @@
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 
-gulp.task('build', ['jsLibs', 'closure', 'imageResize', 'images', 'sass']);
+gulp.task('build', function(callback) {
+  runSequence(
+      'delete'
+    , ['sass', 'closure', 'imageResize', 'images']
+    , 'jekyll'
+    , callback);
+});

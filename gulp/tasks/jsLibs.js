@@ -1,10 +1,11 @@
-var gulp    = require('gulp');
-var concat  = require('gulp-concat');
-var config  = require('../config').jsLibs;
+var gulp         = require('gulp');
+var concat       = require('gulp-concat');
+var config       = require('../config').jsLibs;
+var handleErrors = require('../util/handleErrors');
 
-//the third-party libs like Three.js, TweenLite, etc.
 gulp.task('jsLibs', function() {
-   return gulp.src(config.libs)
-     .pipe(concat(config.bundleName))
-     .pipe(gulp.dest(config.dest));
+  return gulp.src(config.src)
+    .pipe(concat(config.bundleName))
+    .on('error', handleErrors)
+    .pipe(gulp.dest(config.dest));
 });

@@ -1,31 +1,40 @@
-var gutil = require('gulp-util');
-var dest  = './src';
-var src   = './assets';
-var site  = './_site';
-var bower = './bower_components';
+var gutil         = require('gulp-util');
+var jekyllSrc     = './src';
+var assets        = './assets';
+var jekyllOutput  = './_site';
+var bower         = './bower_components';
 
 var production = gutil.env._[0] === 'release';
 
 var jsLibs = [
-  bower + '/countUp/countUp.js',
-  bower + '/skrollr/src/skrollr.js'];
+  bower + '/countUp/countUp.js'
+  ,bower + '/skrollr/src/skrollr.js'
+  ,assets + '/js/app.js'];
 //var closureLibs = jsLibs.slice(); // copy libs
 //closureLibs.unshift(bower + '/jquery/dist/jquery.js');
 
 module.exports = {
   production: production,
-  serverport: 3000,
   browserSync: {
     server: {
-      baseDir: [site]
+      baseDir: [jekyllOutput]
     },
-    files: [site + "/**",
+    port: 3000,
+    files: [jekyllOutput + "/**",
             // exclude map files
-            "!" + dest + "/**.map"]
+            "!" + jekyllSrc + "/**.map"]
+  },
+  jekyll: {
+    src:    jekyllSrc,
+    dest:   jekyllOutput,
+    config: '_config.yml'
+  },
+  delete: {
+    src: [jekyllSrc + "/img", jekyllSrc + "/js", jekyllSrc + "/css"]
   },
   sass: {
-    src: src + "/sass/**/*.{scss,sass}",
-    dest: dest + "/css",
+    src: assets + "/sass/**/*.{scss,sass}",
+    dest: jekyllSrc + "/css",
     sourcemapPath: "./maps",
     settings: {
       outputStyle: production ? "compressed" : "nested",
@@ -35,8 +44,8 @@ module.exports = {
     }
   },
   minifyCSS: {
-    src: dest + "/css/*.css",
-    dest: dest + "/css",
+    src: jekyllSrc + "/css/*.css",
+    dest: jekyllSrc + "/css",
     settings: {
       advanced: true,
       aggressiveMerging: true,
@@ -48,36 +57,36 @@ module.exports = {
   },
   closure: {
     src: [//bower + '/closurelibrary/**/*.js',
-          src + "/js/*.js"],
-    dest: dest + "/js",
+          jekyllSrc + "/js/app.js"],
+    dest: jekyllSrc + "/js",
     settings: {
       compilerPath: 'bower_components/closure-compiler/compiler.jar',
-      fileName: dest + '/js/app.min.js',
+      fileName: jekyllSrc + '/js/app.min.js',
       compilerFlags: {
         compilation_level: 'ADVANCED_OPTIMIZATIONS', //'SIMPLE_OPTIMIZATIONS',
         //externs: closureLibs,
         //output_wrapper: '(function(){%output%})();',
         process_jquery_primitives: true
-        //,warning_level: 'VERBOSE'
+        ,warning_level: 'VERBOSE'
       },
       maxBuffer: 100000
     }
   },
   images: {
-    src: src + "/img/*.{png,jpg,jpeg,gif}",
-    dest: dest + "/img"
+    src: assets + "/img/*.{png,jpg,jpeg,gif}",
+    dest: jekyllSrc + "/img"
   },
   imageResize: {
-    src: src + "/img/resize/**", //for watchify
-    srcMap: src + "/img/resize/",
-    dest: dest + "/img/",
+    src: assets + "/img/resize/**", //for watchify
+    srcMap: assets + "/img/resize/",
+    dest: jekyllSrc + "/img/",
     files: {
       //'logo': {file: 'vita-logo.png', height : 75, crop : false, upscale : false}
     }
   },
   jsLibs: {
-    libs: jsLibs,
-    bundleName: "libs.js",
-    dest: dest + "/js/"
+    src: jsLibs,
+    bundleName: "app.js",
+    dest: jekyllSrc + "/js/"
   }
 };

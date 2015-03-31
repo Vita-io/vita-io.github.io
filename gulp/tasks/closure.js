@@ -4,7 +4,7 @@ var browserSync     = require('browser-sync');
 var handleErrors    = require('../util/handleErrors');
 var config          = require('../config').closure;
 
-gulp.task('closure', function() {
+gulp.task('closure', ['jsLibs'], function() {
   return gulp.src(config.src)
     .pipe(closureCompiler(config.settings))
     .on('error', handleErrors)
