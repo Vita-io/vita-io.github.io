@@ -29,6 +29,7 @@ table {
 
 
 @import "settings";
+@import "functions/prefixer";
 /* @import "foundation"; */
 
 // Or selectively include components
@@ -178,8 +179,7 @@ input[type="text"] {
 	letter-spacing: 0.08em;
 	color: $lightgray;
 
-	-webkit-transition: background 0.4s ease-out;
-	transition: background 0.4s ease-out;
+	@include transition(background 0.4s ease-out);
 
 	&.small{
   	font-size: 14px;
@@ -211,9 +211,26 @@ a.button{ text-decoration: none; }
   border-radius: 0 100px 100px 0;
   margin-left: -3px;
 }
-.button-content{
-	max-width: 100%;
-	display: inline-block;
+#subscribe {
+  letter-spacing: 0.08em;
+  height: auto;
+  color: #353535;
+  font-size: 22px;
+}
+#email-error {
+  letter-spacing: 0.02em;
+  height: 20px;
+  color: #f26969;
+  font-size: 14px;
+}
+#subscribe, #email-error {
+  max-width: 100%;
+  display: inline-block;
+  @include transition(opacity .2s ease-out);
+  &.hidden {
+    height: none;
+    opacity: 0;
+  }
 }
 
 .button-group .button-group-element.secondary{
@@ -359,8 +376,7 @@ padding: 0;
 			border-radius: 20px;
 			-webkit-border-radius: 20px;
 
-			transition				: background 0.2s ease-out;
-			-webkit-transition		: background 0.3s ease-out;
+			@include transition(background 0.2s ease-out);
 		}
 	}
 }
@@ -445,6 +461,17 @@ body.vacancies{
 }
 .vacancy{
   h4{ @extend .shadow-left; }
+
+  > input {
+    display: none;
+
+    &:checked {
+      + header .arrow {
+        @include transform(rotate(180deg));
+      }
+    }
+  }
+
   .vacancy-head{
 
     @extend .shadow-left;
@@ -462,9 +489,9 @@ body.vacancies{
       height: 13px;
       margin: 2.5% 2% 0 0;
 
-      transition: transform 0.2s ease-out;
-      -webkit-transition: -webkit-transform 0.2s ease-out;
-      transition-delay: 0.4s;
+      @include transform(rotate(0deg));
+      @include transition(transform 0.2s ease-out);
+      @include transition-delay(0.4s);
 
       svg{
         display: block;
@@ -485,14 +512,13 @@ body.vacancies{
     }
   }
   .content{
+    position: relative;
     overflow: hidden;
     height: 0px;
     margin-top: 20px;
-
-    transition			    : height 0.8s ease-in-out;
-		-webkit-transition	: height 0.8s ease-in-out;
-
 		color: $darkgray;
+
+    @include transition(height 0.8s ease-in-out);
 
 		ul{
   		list-style: circle;
@@ -562,8 +588,7 @@ body.vacancies{
 			text-overflow: clip;
 			overflow: hidden;
 
-			transition: opacity 0.3s ease-out;
-			-webkit-transition: opacity 0.3s ease-out;
+			@include transition(opacity 0.3s ease-out);
       opacity: 0.1;
 
       &.active {

@@ -7,7 +7,8 @@ var bower         = './bower_components';
 var production = gutil.env._[0] === 'release';
 
 var jsLibs = [
-  bower + '/countUp/countUp.js'
+  assets + '/js/module.js'
+  ,bower + '/countUp/countUp.js'
   ,bower + '/skrollr/src/skrollr.js'
   ,assets + '/js/app.js'];
 //var closureLibs = jsLibs.slice(); // copy libs
@@ -17,7 +18,7 @@ module.exports = {
   production: production,
   browserSync: {
     server: {
-      baseDir: [jekyllOutput]
+      baseDir: [assets, jekyllOutput]
     },
     port: 3000,
     files: [jekyllOutput + "/**",
