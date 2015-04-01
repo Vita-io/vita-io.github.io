@@ -4,8 +4,15 @@ email: info@vita.io
 description: Homepage of Vita.IO
 baseurl: "/vita-io" # the subpath of your site, e.g. /blog/
 url: "http://vita.io" # the base hostname & protocol for your site
-twitter_username: VitaAnalytics
-github_username:  vita-io
+
+contact:
+  address: Heer Bokelweg 155
+  zipcode: 3032 AD
+  city: Rotterdam
+  country: The Netherlands
+  email: hello@vita.io
+  phone: 012-3456789
+  twitter: VitaAnalytics
 
 # Build settings
 markdown: kramdown
