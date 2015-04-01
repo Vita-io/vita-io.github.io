@@ -1,6 +1,6 @@
 ---
 layout: default
-name: vacancies
+class: vacancies
 ---
 <a href="http://vita.io" class="button back fix-top-left">&larr; back home</a>
 <header id="top-opening">
@@ -29,9 +29,11 @@ The people who work here have a wide variety of interests and fascinating life e
 
     <li class="vacancy-item medium-12 small-11">
       <article class="vacancy">
+        <input id="vacancy-1" name="vacancy" type="radio">
         <header>
           <h3 class="vacancy-head header" itemprop="title">
-            <span class="title">Front-end developer</span>
+            <label for="vacancy-1"><span class="title">Front-end developer</span></label>
+
             <div class="arrow">
               <svg width="26px" height="13px" viewBox="0 0 26 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                <path fill="none" stroke="#F7F8F8" stroke-width="3" d="M23.937,1.725l-6.988,6.989c-2.205,2.204-5.781,2.204-7.985,0L1.975,1.725" />
@@ -87,7 +89,7 @@ being tested.
            <li>Travel cost compensation</li>
            <li>and of course we have facilities to play table football, table tennis, xbox  etc.</li>
          </ul>
-         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:apply@vita.io" class="button small highlight">apply@vita.io</a></span>
+         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:{{site.vacancyEmail}}" class="button small highlight">{{site.vacancyEmail}}</a></span>
        </section>
 
      </article>
@@ -95,10 +97,10 @@ being tested.
 
    <li class="vacancy-item medium-12 small-11">
      <article class="vacancy">
-
+       <input id="vacancy-2" name="vacancy" type="radio">
        <header>
          <h3 class="vacancy-head header" itemprop="title">
-           <span class="title">Server architect</span>
+           <label for="vacancy-2"><span class="title">Server architect</span></label>
            <div class="arrow">
              <svg width="26px" height="13px" viewBox="0 0 26 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
               <path fill="none" stroke="#F7F8F8" stroke-width="3" d="M23.937,1.725l-6.988,6.989c-2.205,2.204-5.781,2.204-7.985,0L1.975,1.725" />
@@ -149,7 +151,7 @@ being tested.
            <li>and of course we have facilities to play table football, table tennis, xbox  etc.</li>
          </ul>
 
-         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:apply@vita.io" class="button small highlight">apply@vita.io</a></span>
+         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:{{site.vacancyEmail}}" class="button small highlight">{{site.vacancyEmail}}</a></span>
        </section>
 
      </article>
@@ -157,10 +159,10 @@ being tested.
 
    <li class="vacancy-item medium-12 small-11">
      <article class="vacancy">
-
+       <input id="vacancy-3" name="vacancy" type="radio">
        <header>
          <h3 class="vacancy-head header" itemprop="title">
-           <span class="title">Sentiment data expert</span>
+           <label for="vacancy-3"><span class="title">Sentiment data expert</span></label>
            <div class="arrow">
              <svg width="26px" height="13px" viewBox="0 0 26 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
               <path fill="none" stroke="#F7F8F8" stroke-width="3" d="M23.937,1.725l-6.988,6.989c-2.205,2.204-5.781,2.204-7.985,0L1.975,1.725" />
@@ -211,7 +213,7 @@ being tested.
            <li>and of course we have facilities to play table football, table tennis, xbox  etc.</li>
          </ul>
 
-         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:apply@vita.io" class="button small highlight">apply@vita.io</a></span>
+         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:{{site.vacancyEmail}}" class="button small highlight">{{site.vacancyEmail}}</a></span>
        </section>
 
      </article>
@@ -219,10 +221,10 @@ being tested.
 
    <li class="vacancy-item medium-12 small-11">
      <article class="vacancy">
-
+       <input id="vacancy-4" name="vacancy" type="radio">
        <header>
          <h3 class="vacancy-head header" itemprop="title">
-           <span class="title">Data expert</span>
+           <label for="vacancy-4"><span class="title">Data expert</span></label>
            <div class="arrow">
              <svg width="26px" height="13px" viewBox="0 0 26 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
               <path fill="none" stroke="#F7F8F8" stroke-width="3" d="M23.937,1.725l-6.988,6.989c-2.205,2.204-5.781,2.204-7.985,0L1.975,1.725" />
@@ -279,7 +281,7 @@ At 16:28 you decide to take the team meeting outside since the weather is perfec
            <li>and of course we have facilities to play table football, table tennis, xbox  etc.</li>
          </ul>
 
-         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:apply@vita.io" class="button small highlight">apply@vita.io</a></span>
+         <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:{{site.vacancyEmail}}" class="button small highlight">{{site.vacancyEmail}}</a></span>
        </section>
 
      </article>
@@ -294,6 +296,6 @@ At 16:28 you decide to take the team meeting outside since the weather is perfec
    <br/>You are more than welcome to pitch us a bold offer, we love enthusiastic people!
    <br/><br/>
    Also for other questions about our vacancies,
-   <br/> just send an email to Robert via:<br/> <a class="button highlight hiring" href="mailto:apply@vita.io">apply@vita.io</a>
+   <br/> just send an email to Robert via:<br/> <a class="button highlight hiring" href="mailto:{{site.vacancyEmail}}">{{site.vacancyEmail}}</a>
  </p>
 </section>
