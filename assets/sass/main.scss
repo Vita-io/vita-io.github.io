@@ -205,26 +205,34 @@ a.button{ text-decoration: none; }
   display: inline-block;
   border-radius: 100px 0 0 100px;
   margin-right: -4px;
+  top: -5px;
+  position: relative;
 }
 .button-group .button-group-element:last-child{
   display: inline-block;
   border-radius: 0 100px 100px 0;
   margin-left: -3px;
+  height: 62px;
+  position: relative;
 }
 #subscribe {
   letter-spacing: 0.08em;
   height: auto;
   color: #353535;
   font-size: 22px;
+  top: 15px;
 }
 #email-error {
   letter-spacing: 0.02em;
   height: 20px;
   color: #f26969;
   font-size: 14px;
+  top: 20px;
 }
 #subscribe, #email-error {
-  max-width: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
   display: inline-block;
   @include transition(opacity .2s ease-out);
   &.hidden {

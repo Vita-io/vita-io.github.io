@@ -41,32 +41,61 @@ function getOffset(elem) {
 function verticalScrollPos () {
   return window.pageYOffset || document.body.scrollTop;
 }
+function viewportHeight () {
+  return document.compatMode == "CSS1Compat"
+    ? document.documentElement.clientHeight
+    : document.body.clientHeight;
+}
+function maxVerticalScroll () {
+  return Math.max(0, document.body.scrollHeight - viewportHeight());
+}
 
 // animated scrolling
 var scrollInterval = null,
     fps            = 60,
     frameTime      = 1000 / fps,
-    scrollFilter   = 0.2;
+    scrollFilter   = 0.07;
+
+function stopAnimatedScroll () {
+  clearInterval(scrollInterval);
+  //document.removeEventListener('scroll', stopAnimatedScroll, false);
+}
 
 function scrollAnimatedTo (targetY) {
+  var targetY = Math.round(targetY),
+      targetInc = targetY * scrollFilter;
+
   // stop previous animation
-  clearInterval(scrollInterval);
-  console.log("begin", targetY, verticalScrollPos());
+  stopAnimatedScroll();
+  //document.addEventListener('scroll', stopAnimatedScroll, false);
 
   // begin animation
   scrollInterval = window.setInterval(function () {
     var curY = verticalScrollPos(),
         diff = curY - targetY;
 
-    if (Math.abs(diff) <= .5) {
-      clearInterval(scrollInterval);
-      window.scroll(0, Math.round(targetY));
+    if (Math.abs(diff) <= 7) {
+      stopAnimatedScroll();
+      window.scroll(0, targetY);
     } else {
-      console.log("scrolTo", curY, (curY * (1 - scrollFilter)), (targetY * scrollFilter));
-      window.scroll(0, (curY * (1 - scrollFilter)) + (targetY * scrollFilter));
+      window.scroll(0, Math.round((curY * (1 - scrollFilter)) + targetInc));
     }
   }, frameTime);
 }
+
+function getCenteredScrollPos (elm) {
+  var rect       = elm.getBoundingClientRect(),
+      elmHeight  = elm.offsetHeight,
+      curY       = verticalScrollPos(),
+      offset     = parseInt(elm.getAttribute("data-scroll-offset"), 10) || 0;
+  return Math.min(maxVerticalScroll(),
+                  Math.round(curY + rect.top - ((window.innerHeight - elmHeight) / 2) + offset));
+}
+
+function scrollToElm (elmID) {
+  scrollAnimatedTo(getCenteredScrollPos(document.getElementById(elmID)));
+}
+
 
 var emailRegex = /^([a-zA-Z0-9_+\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 function isValidEmail (v) {
@@ -163,7 +192,6 @@ function getCSSProp (elm, prop) {
   //
 
 	if (document.body.classList.contains("home")) {
-    console.log("home");
     //
     // rotate highlighted words
     //
@@ -221,15 +249,15 @@ function getCSSProp (elm, prop) {
       var line = createSVG("path");
 
       if (isEven(i)) {
-        line.setAttribute('stroke', "url(#gradient-blue)");
         line.setAttribute('data-0',    '@d:M' + (-200 + (offset * i)) + ',200 L' + (-200 + (offset * i)) + ',200');
         line.setAttribute('data-100',  '@d:M' + (-200 + (offset * i)) + ',200 L' + (150  + (offset * i)) + ',100');
         line.setAttribute('data-700',  '@d:M' + (-200 + (offset * i)) + ',200 L' + (350  + (offset * i)) + ',42');
+        line.setAttribute('stroke', "url(#gradient-blue)");
       } else {
-        line.setAttribute('stroke', "url(#gradient-black)");
         line.setAttribute('data-0',    '@d:M' + (150 + (offset * i)) + ',100 L' + (150   + (offset * i)) + ',100');
         line.setAttribute('data-100',  '@d:M' + (150 + (offset * i)) + ',100 L' + (-200  + (offset * i)) + ',200');
         line.setAttribute('data-1000', '@d:M' + (150 + (offset * i)) + ',100 L' + (-400  + (offset * i)) + ',250');
+        line.setAttribute('stroke', "url(#gradient-black)");
       }
 
       line.setAttribute('d', 'M' + (-200 + (offset * i)) + ',200 L' + (150 + (offset * i)) + ',100');
@@ -240,17 +268,7 @@ function getCSSProp (elm, prop) {
       svgContainer.appendChild(line);
     }
 
-    var slideScollPosY = function (slideElm) {
-      var slideHeight = slideElm.offsetHeight,
-          slidePadding = parseInt(getCSSProp(slideElm, "padding-top"), 10), // * 2,
-          slidePos = getOffset(slideElm).top,
-          slideScrollOffset = parseInt(slideElm.getAttribute("data-scroll-offset"), 10) || 0;
 
-      return slideHeight > wHeight - 200 // copied if-statement from click function, is it needed for nav-item as well?
-        ? slidePos + slidePadding
-        : slidePos - 50 - (wHeight / 2) - slideHeight - slidePadding - slideScrollOffset;
-      //: slidePos - (wHeight / 2) - (slideHeight / 2) - slidePadding) - slideScrollOffset; //FIXME which implementation is correct?
-    }
 
     //
     // create navigation dots (if not mobile version)
@@ -259,33 +277,21 @@ function getCSSProp (elm, prop) {
     if (!html.classList.contains("skrollr-mobile")) {
       var fixedNav  = document.querySelector("#fixed-nav .nav-item-list");
 
-      var addNavItem = function (targetID, scrollPos) {
-        wrapper.innerHTML = '<li class="nav-item"><a href="#'+targetID+'" class="nav-item-link" data-'+scrollPos+'="background:#fff"></a></li>';
+      var addNavItem = function (targetID, disableOnPos, enableOnPos) {
+        wrapper.innerHTML = '<li class="nav-item"><a href="#'+targetID+'" class="nav-item-link"'
+                              + (disableOnPos != null ? 'data-'+disableOnPos+'="background:transparent"' : '')
+                              + (enableOnPos  != null ? 'data-'+enableOnPos+'="background:#fff"></a></li>' : '');
         fixedNav.appendChild(wrapper.firstChild);
       }
 
       //top-opening
-      addNavItem('top-opening', -1);
+      addNavItem('top-opening', null, -1);
 
       for (var i = 0, elm; elm = slides[i]; i++) {
-        addNavItem(elm.id, slideScollPosY(elm));
+        addNavItem(elm.id, 0, getCenteredScrollPos(elm) - 200);
       }
 
       fixedNav.style.height = (23 * fixedNav.childNodes.length) + "px";
-    }
-
-    //goto slide
-    var scrollToSlide = function (slideID) {
-      scrollAnimatedTo(slideScollPosY(document.getElementById(slideID)));
-    }
-
-    if (!html.classList.contains("skrollr-mobile")) {
-      var btns = document.querySelectorAll('.nav-item-link, #learn-more .arrow-down');
-      for (var i = 0, elm; elm = btns[i]; i++) {
-        (function (elm) {
-          elm.addEventListener('click', function () { scrollToSlide(elm.getAttribute('href').substr(1)); }, false);
-        })(elm);
-      }
     }
   }
 
@@ -301,8 +307,8 @@ function getCSSProp (elm, prop) {
     elm.setAttribute('data-' + (data - 300) + '-center', '@opacity:0;transform:translateY(-60px)');
   }
 
-	//bubbles scroll animation
-  var bubbles = document.querySelectorAll('.bubble'),
+	//bubbles scroll animation UNUSED?
+  /*var bubbles = document.querySelectorAll('.bubble'),
     bubbleStart = 200,
     bubbleOffset = 30,
     bubbleLength = bubbles.length;
@@ -312,7 +318,7 @@ function getCSSProp (elm, prop) {
     elm.setAttribute('data-' + data + '-center',         '@opacity:0;transform:translateY(0px);');
     elm.setAttribute('data-' + (data - 150) + '-center', '@opacity:1;transform:translateY(-30px);');
     elm.setAttribute('data-' + (data - 300) + '-center', '@opacity:0;transform:translateY(-60px)');
-  }
+  }*/
 
 	//all done, refresh skrollr
 	s.refresh();
@@ -324,12 +330,13 @@ function getCSSProp (elm, prop) {
   var form = document.getElementById("download-press"),
       errorTimer = null;
   var validateForm = function (evt) {
-    console.log('validate form');
+    console.log('validate form',document.getElementById("EMAIL").value, isValidEmail(document.getElementById("EMAIL").value));
     evt.preventDefault();
 
     if (isValidEmail(document.getElementById("EMAIL").value)) {
       form.removeEventListener('submit', validateForm, false);
       form.submit();
+      form.addEventListener('submit', validateForm, false);
     } else {
       var subscribe = document.getElementById("subscribe"),
           error     = document.getElementById("email-error");
@@ -349,16 +356,14 @@ function getCSSProp (elm, prop) {
     form.addEventListener('submit', validateForm, false);
   }
 
-  //
-	// scrollTo button add .scrollTo class + data-scroll="[scroll position]"
-  //
-  var scrollToBtns = document.querySelectorAll(".scrollTo");
-  for (var i = 0, elm; elm = scrollToBtns[i]; i++) {
-    (function (elm) {
-      elm.addEventListener("click", function () {
-        scrollAnimatedTo(parseInt(elm.getAttribute("data-scroll"), 10));
-      }, false);
-    })(elm);
+
+  if (!html.classList.contains("skrollr-mobile")) {
+    var btns = document.querySelectorAll('.nav-item-link, #learn-more .arrow-down, .scrollto');
+    for (var i = 0, elm; elm = btns[i]; i++) {
+      (function (elm) {
+        elm.addEventListener('click', function (evt) { evt.preventDefault(); scrollToElm(elm.getAttribute('href').substr(1)); }, false);
+      })(elm);
+    }
   }
 
 	//accordeon .accordeon for wrapper/list, child .content for to animated elements(can be more than one)
