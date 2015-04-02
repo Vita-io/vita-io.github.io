@@ -4,7 +4,7 @@ var assets        = './assets';
 var jekyllOutput  = './_site';
 var bower         = './bower_components';
 
-var production = gutil.env._[0] === 'release';
+var production    = gutil.env._[0] === 'release';
 
 var jsLibs = [
   assets + '/js/module.js'
@@ -18,7 +18,7 @@ module.exports = {
   production: production,
   browserSync: {
     server: {
-      baseDir: [assets, jekyllOutput]
+      baseDir: [jekyllOutput]
     },
     port: 3000,
     files: [jekyllOutput + "/**",
@@ -28,7 +28,18 @@ module.exports = {
   jekyll: {
     src:    jekyllSrc,
     dest:   jekyllOutput,
-    config: '_config.yml'
+    config: '_config.yml',
+    watch: [
+      '_config.yml',
+      '_config.build.yml',
+      jekyllSrc + '/_data/**/*.{json,yml,csv}',
+      jekyllSrc + '/_includes/**/*.{html,xml}',
+      jekyllSrc + '/_layouts/*.html',
+      jekyllSrc + '/_plugins/*.rb',
+      jekyllSrc + '/_posts/*.{markdown,md}',
+      jekyllSrc + '/**/*.{html,markdown,md,yml,json,txt,xml}',
+      jekyllSrc + '/**/*.{js,css,png,jpg,jpeg,gif,svg}'
+    ]
   },
   delete: {
     src: [jekyllSrc + "/img", jekyllSrc + "/js", jekyllSrc + "/css"]

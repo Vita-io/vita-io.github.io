@@ -1,5 +1,6 @@
 //var changed     = require('gulp-changed');
 var gulp        = require('gulp');
+var changed     = require('gulp-changed');
 var imageResize = require('gulp-image-resize');
 var imagemin    = require('gulp-imagemin');
 var config      = require('../config').imageResize;
@@ -14,7 +15,7 @@ names.forEach(function(name) {
 
   gulp.task(taskName, function () {
     gulp.src(config.srcMap + conf.file)
-  //.pipe(changed(config.dest)) // Ignore unchanged files
+    .pipe(changed(config.dest)) // Ignore unchanged files
     .pipe(imageResize(conf))
     .on('error', handleErrors)
     .pipe(imagemin()) // Optimize
