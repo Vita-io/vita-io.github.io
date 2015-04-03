@@ -62,7 +62,7 @@ module.exports = {
     dest: jekyllSrc + "/css",
     uncss: {
       html: [jekyllOutput + '/**/*.html'],
-      ignore: ['#top-opening #slogan .rotate.active', /input:[:a-z-]+\-placeholder/]
+      ignore: ['#top-opening #slogan .rotate', '#top-opening #slogan .rotate.active', /input:[:a-z-]+\-placeholder/]
     },
     settings: {
       advanced: true,
