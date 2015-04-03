@@ -21,3 +21,14 @@ git add -a
 git commit -m "your update message"
 git push
 # and we're live```
+
+## Editing
+
+Folder overview:
+
+- `src/`:
+  - texts, like vacancies
+  - templaces
+  - generated assets (css, js, images, svg) -> * DON'T EDIT THESE HERE, BUT IN `assets/`
+- `assets/`: source assets; these will be optimized by gulp
+- `_site/`: generated jekyll files; never modify this folder
