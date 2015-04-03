@@ -228,8 +228,10 @@ a.button{ text-decoration: none; }
   }
 
   #email-btn {
-    //max-width: 290px;
     padding: 15px rem-calc(40);
+    .hidden {
+      opacity: 0;
+    }
   }
 }
 
@@ -253,25 +255,9 @@ a.button{ text-decoration: none; }
   left: 0;
   display: inline-block;
   @include transition(opacity .2s ease-out);
-  &.hidden {
-    height: none;
-    opacity: 0;
-  }
 }
 
-::-webkit-input-placeholder{
-  color: $white;
-  opacity: 0.4;
-}
-::-moz-input-placeholder{
-  color: $white;
-  opacity: 0.4;
-}
-:-moz-input-placeholder{
-  color: $white;
-  opacity: 0.4;
-}
-:-ms-input-placeholder{
+@include placeholder("input") {
   color: $white;
   opacity: 0.4;
 }

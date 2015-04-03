@@ -399,7 +399,7 @@
   #{$selector}::-moz-placeholder { /* Mozilla Firefox 19+ */
     @content;
   }
-  #{$selector}::-ms-input-placeholder { /* Internet Explorer 10+ */
+  #{$selector}:-ms-input-placeholder { /* Internet Explorer 10+ */
     @content;
   }
 }
