@@ -1,0 +1,39 @@
+---
+layout: default
+class: vacancies
+---
+<a href="http://vita.io" class="button back fix-top-left">&larr; back home</a>
+<header id="top-opening">
+  <div class="row">
+
+    <div class="medium-5 small-5 column">
+      <h1><span class="bigtext">We're</span> <br/>looking for <span class="bigtext">talent!</span></h1>
+      <button class="button scrollto" href="#vacancies">view our vacancies</button>
+    </div>
+
+    <div class="medium-7 small-7 column">
+      <p><br>Vita.io is an innovative IT-startup based in Rotterdam. We believe in ‘people first’. It is our mission to help organisations optimize their human potential and get the right people, in the right place, at the right time. That mentality is also applied to our own organisation (on daily basis)!</p>
+      <p>As such, we have developed an HR analytics platform. We make data driven SaaS solutions that provides strategic insights based on the knowledge, skills, competencies, sentiment and stress levels of employees.</p>
+      <p>Vita.io was founded in 2013 and  we are on our way to grow massively. That’s why we need you! Are you passionate about technical challenges and smart solutions? Then Vita.io is your place to be!</p>
+      <p>The people who work here have a wide variety of interests and fascinating life experiences. We are ambitious with an innovative and entrepreneurial mindset. We share a floor with several other startups in a co-creative atmosphere. You’ll have a chance to learn from some of the best experts available and we’ll get to learn from you! Please check out our vacancies or send an email to hello@vita.io.</p>
+    </div>
+  </div>
+</header>
+<section class="row" id="vacancies">
+
+  <ol class="vacancy-list accordeon" itemscope itemtype="http://schema.org/JobPosting">
+  {% assign sorted_vacancies = (site.vacancies | sort: 'order') %}
+  {% for vacancy in sorted_vacancies %}
+    {% if vacancy.publish == true %}
+      {% include {{vacancy.layout}}.html vacancy=vacancy %}
+    {% endif %}
+  {% endfor %}
+  </ol>
+
+</section>
+<section id="contact" class="row">
+  <p class="slide-text">Curious about working for <a href="http://www.vita.io">Vita.io</a> but no suitable vacancies available?
+    <br/>You are more than welcome to pitch us a bold offer, we love enthusiastic people!</p>
+  <p class="slide-text">Also for other questions about our vacancies,
+    <br/> just send an email to Robert via:<br/> <a class="button highlight hiring" href="mailto:{{site.vacancyEmail}}">{{site.vacancyEmail}}</a></p>
+</section>

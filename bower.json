@@ -1,0 +1,19 @@
+{
+  "name": "vita-io-website",
+  "version": "1.0.0",
+  "private": "true",
+  "dependencies": {
+    "foundation": "zurb/bower-foundation",
+    "skrollr": "git://github.com/Vita-io/skrollr.git",
+    "countUp": "git://github.com/Vita-io/countUp.js.git",
+    "closure-compiler": "http://dl.google.com/closure-compiler/compiler-latest.zip",
+    "jquery": "jquery/jquery"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    ".sass-cache",
+    "_site"
+  ]
+}
