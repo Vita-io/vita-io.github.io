@@ -1,0 +1,14 @@
+<svg version="1.1" class="slide-visual" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" data-200-center="transform: translate(0,-100px); opacity:0" data--50-center="transform: translate(0,0px); opacity:1">
+  <circle fill="none" stroke="#F7F7F7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="100.107" cy="59.492" r="30.679"/>
+  <circle fill="none" stroke="#F7F7F7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="99.5" cy="100.333" r="93.335"/>
+  <path fill="none" stroke="#F7F7F7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+    M34,165.833V129.53c0-16.945,14.716-30.681,31.66-30.681c7.199,0,23.99,6.197,34.267,6.197s25.704-6.197,33.086-6.197
+    c16.945,0,29.987,13.735,29.987,30.681v36.303"/>
+  <line fill="none" stroke="#F7F7F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="100.227" y1="162.585" x2="100.227" y2="145.851"/>
+  <line fill="none" stroke="#F7F7F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="100.202" y1="145.386" x2="94.595" y2="150.993"/>
+  <line fill="none" stroke="#F7F7F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="100.252" y1="145.386" x2="105.856" y2="150.993"/>
+  <path fill="none" stroke="#F7F7F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+    M100.405,175.076c23.12-28.615,23.176-35.319,23.112-40.345c0-5.99-5.177-9.502-11.556-9.502c-6.378,0-11.555,7.604-11.555,13.604
+    h-0.115c0-6-5.171-13.604-11.552-13.604c-6.38,0-11.498,4.536-11.498,10.526C77.176,140.779,77.286,146.461,100.405,175.076
+    L100.405,175.076z"/>
+</svg>

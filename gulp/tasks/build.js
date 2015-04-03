@@ -4,7 +4,7 @@ var runSequence = require('run-sequence');
 gulp.task('build', function(callback) {
   runSequence(
       'delete'
-    , ['minifyHTML', 'sass', 'closure', 'imageResize', 'images']
+    , ['svg', 'minifyHTML', 'sass', 'closure', 'imageResize', 'images']
     , 'jekyll'
     , callback);
 });

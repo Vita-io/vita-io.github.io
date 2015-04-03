@@ -33,8 +33,10 @@ module.exports = {
        '_config.yml'
       ,'_config.build.yml'
       ,jekyllSrc + '/_data/**/*.{json,yml,csv}'
-      ,jekyllSrc + '/_includes/**/*.{html,xml}'
+      ,jekyllSrc + '/_includes/**/*.{html,xml,svg}'
       ,jekyllSrc + '/_layouts/*.html'
+      ,jekyllSrc + '/vacancies/index.html'
+      ,jekyllSrc + '/index.html'
       ,jekyllSrc + '/_*/**/*.{markdown,md,yml,json,txt,xml}'
       ,jekyllSrc + '/img/*.{png,jpg,jpeg,gif,svg}'
       ,jekyllSrc + '/css/*.css'
@@ -42,7 +44,7 @@ module.exports = {
     ]
   },
   delete: {
-    src: [jekyllSrc + "/img", jekyllSrc + "/js", jekyllSrc + "/css"]
+    src: [jekyllSrc + "/img", jekyllSrc + "/js", jekyllSrc + "/css", jekyllSrc + "/_includes", jekyllSrc + "/_layouts"]
   },
   sass: {
     src: src + "/sass/**/*.{scss,sass}",
@@ -107,5 +109,18 @@ module.exports = {
     src: jsLibs,
     bundleName: "app.js",
     dest: jekyllSrc + "/js/"
+  },
+  svg: {
+    src: src + "/_includes/**/*.svg",
+    dest: jekyllSrc + "/_includes",
+    settings: {
+      plugins: [
+         {cleanupAttrs: false} /* keep class/ids! */
+        ,{mergePaths: false} /* too aggressive in people-money-svg */
+        ,{removeUselessDefs: false} /* keep defs in top-plx-container.svg */
+        ,{cleanupIDs: false}
+        ,{removeHiddenElems: false} /* also removes opacity=0 in people-money.svg */
+      ]
+    }
   }
 };
