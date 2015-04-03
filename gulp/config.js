@@ -1,6 +1,6 @@
 var gutil         = require('gulp-util');
 var jekyllSrc     = '.';
-var assets        = './assets';
+var assets        = './src';
 var jekyllOutput  = './_site';
 var bower         = './bower_components';
 
