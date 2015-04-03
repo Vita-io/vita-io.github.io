@@ -70,7 +70,7 @@ module.exports = {
   closure: {
     src: [//bower + '/closurelibrary/**/*.js',
           jekyllSrc + "/js/app.js"],
-    dest: jekyllSrc + "/js",
+    dest: "",
     settings: {
       compilerPath: 'bower_components/closure-compiler/compiler.jar',
       fileName: jekyllSrc + '/js/app.min.js',
