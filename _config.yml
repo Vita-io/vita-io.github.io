@@ -22,7 +22,6 @@ collections:
 
 markdown: kramdown
 exclude:
-  - assets/
   - bower_components/
   - gulp/
   - bower.json
@@ -32,6 +31,7 @@ exclude:
   - node_modules/
   - package.json
   - README.md
+  - src/
   - vita.io.sublime-project
   - vita.io.sublime-workspace
 

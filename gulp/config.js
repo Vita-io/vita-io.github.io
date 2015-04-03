@@ -1,16 +1,16 @@
 var gutil         = require('gulp-util');
 var jekyllSrc     = '.';
-var assets        = './src';
+var src           = './src';
 var jekyllOutput  = './_site';
 var bower         = './bower_components';
 
 var production    = gutil.env._[0] === 'release';
 
 var jsLibs = [
-  assets + '/js/module.js'
+  src + '/js/module.js'
   ,bower + '/countUp/countUp.js'
   ,bower + '/skrollr/src/skrollr.js'
-  ,assets + '/js/app.js'];
+  ,src + '/js/app.js'];
 //var closureLibs = jsLibs.slice(); // copy libs
 //closureLibs.unshift(bower + '/jquery/dist/jquery.js');
 
@@ -45,7 +45,7 @@ module.exports = {
     src: [jekyllSrc + "/img", jekyllSrc + "/js", jekyllSrc + "/css"]
   },
   sass: {
-    src: assets + "/sass/**/*.{scss,sass}",
+    src: src + "/sass/**/*.{scss,sass}",
     dest: jekyllSrc + "/css",
     sourcemapPath: "./maps",
     settings: {
@@ -71,6 +71,11 @@ module.exports = {
       roundingPrecision: 2 //-1 disables rounding precission
     }
   },
+  minifyHTML: {
+    src: [src + "/**/*.html"],
+    dest: jekyllSrc,
+    opts: {quotes: true}
+  },
   closure: {
     src: [//bower + '/closurelibrary/**/*.js',
           jekyllSrc + "/js/app.js"],
@@ -87,12 +92,12 @@ module.exports = {
     }
   },
   images: {
-    src: assets + "/img/*.{png,jpg,jpeg,gif}",
+    src: src + "/img/*.{png,jpg,jpeg,gif}",
     dest: jekyllSrc + "/img"
   },
   imageResize: {
-    src: assets + "/img/resize/**", //for watchify
-    srcMap: assets + "/img/resize/",
+    src: src + "/img/resize/**", //for watchify
+    srcMap: src + "/img/resize/",
     dest: jekyllSrc + "/img/",
     files: {
       //'logo': {file: 'vita-logo.png', height : 75, crop : false, upscale : false}
