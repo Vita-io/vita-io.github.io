@@ -92,8 +92,11 @@ function getCenteredScrollPos (elm) {
                   Math.round(curY + rect.top - ((window.innerHeight - elmHeight) / 2) + offset));
 }
 
-function scrollToElm (elmID) {
-  scrollAnimatedTo(getCenteredScrollPos(document.getElementById(elmID)));
+function scrollToElm (elm) {
+  scrollAnimatedTo(getCenteredScrollPos(elm));
+}
+function scrollToElmID (elmID) {
+  scrollToElm(document.getElementById(elmID));
 }
 
 
@@ -361,71 +364,61 @@ function getCSSProp (elm, prop) {
     var btns = document.querySelectorAll('.nav-item-link, #learn-more .arrow-down, .scrollto');
     for (var i = 0, elm; elm = btns[i]; i++) {
       (function (elm) {
-        elm.addEventListener('click', function (evt) { evt.preventDefault(); scrollToElm(elm.getAttribute('href').substr(1)); }, false);
+        elm.addEventListener('click', function (evt) { evt.preventDefault(); scrollToElmID(elm.getAttribute('href').substr(1)); }, false);
       })(elm);
     }
   }
 
-	//accordeon .accordeon for wrapper/list, child .content for to animated elements(can be more than one)
-	/*$(".accordeon").children().each(function(){
-  	var defaultH = $(".content",this).css("height","auto").height(),
-  	    startH = 0,
-  	    $itemContent = $(".content",this),
-  	    itemOffset = $(".header",this).offset().top,
-  	    itemTitle = $(".header .title",this).html();
+  //
+  // initialize accordeon
+  //
 
-  	    itemTitle = itemTitle.toLowerCase();
-  	    cleanTitle = itemTitle.replace(/\s/g, '-');
+  var accordeonContent = function (radioBtn) {
+    return radioBtn.parentNode.querySelector(".content");
+  }
 
-    $(".header",this).attr("id",cleanTitle);
+  var accordeons = document.querySelectorAll(".accordeon");
+  for (var i = 0, elm; elm = accordeons[i]; i++) {
+    (function (accordeon) {
+      var btns = accordeon.querySelectorAll(".accordeon-btn"),
+          prev = null;
+      for (var i = 0, elm; elm = btns[i]; i++) {
+        (function (radioBtn) {
+          //measure content-height
+          var content = accordeonContent(radioBtn);
+          content.style.height = "auto";
+          var height = content.offsetHeight;
+          content.style.height = 0;
 
-  	$itemContent.css("height",startH+"px");
-  	$(".header",this).click(function(e){
+          radioBtn.openAccordeon = function () {
+            console.log("change", radioBtn);
+            if (prev) {
+              accordeonContent(prev).style.height = 0;
+            }
 
-    	//close other children
-    	$(".accordeon .content").css("height",startH+"px");
-  	  $(".accordeon .arrow").css({
-    	  "transform":"rotate(0deg)",
-    	  "-webkit-transform":"rotate(0deg)"
-  	  });
+            content.style.height = height + "px";
+            setTimeout(function () {
+              scrollToElm(radioBtn.parentNode);
+            }, 1000);
+            prev = radioBtn;
+          };
 
-    	if($itemContent.height() === startH){
-      	$itemContent.css({
-        	"height":defaultH
-      	}).queue(function(){
-        	setTimeout(function(){s.refresh();}, 800);
-      	}).next();
-      	$("body,html").delay(200).animate({
-        	scrollTop: itemOffset
-      	},800,"swing");
-      	if($(".arrow",this)){
-      	  $(".arrow",this).css({
-        	  "transform":"rotate(180deg)",
-        	  "-webkit-transform":"rotate(180deg)"
-      	  });
-      	}
-    	}else{
-      	$itemContent.css({
-        	"height":startH
-      	}).queue(function(){
-        	setTimeout(function(){s.refresh();}, 900);
-      	}).next();
-      	if($(".arrow",this)){
-      	  $(".arrow",this).css({
-        	  "transform":"rotate(0deg)",
-        	  "-webkit-transform":"rotate(0deg)"
-      	  });
-      	}
-    	}
-  	});
-	});*/
+          radioBtn.addEventListener("change", radioBtn.openAccordeon, false);
+        })(elm);
+      }
+    })(elm);
+  }
 
-	/* open specified element if hash is given */
-/*var h = window.location.hash.toLowerCase();
-var clean =  h.replace(/\s/g, '-');
-    $hTarget = $(clean);
-//console.log($hTarget);
-$hTarget.click();
-*/
-
+  if (document.body.classList.contains("vacancies")) {
+    var hash = window.location.hash.toLowerCase();
+    if (hash != "") {
+      setTimeout(function() {
+        var radioBtn = document.querySelector(hash + " .accordeon-btn");
+        if (radioBtn) {
+          radioBtn.checked = true;
+          radioBtn.openAccordeon();
+        }
+      }, 500);
+    }
+  }
 })();
