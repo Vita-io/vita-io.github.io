@@ -6,7 +6,8 @@ The website of Vita.IO is meant to run on Github Pages. Github Pages doesn't all
 
 ```bash
 npm install
-bower install```
+bower install
+```
 
 ## Running gulp
 
@@ -16,11 +17,13 @@ During development it's nice to have features as auto-compilation and auto-reloa
 
 Every push to Github will automaticly update the website. The assets (JS, images, SASS) used should be compiled with gulp before committing. So after a change run:
 
-```gulp release
+```bash
+gulp release
 git add -a
 git commit -m "your update message"
 git push
-# and we're live```
+# and we're live
+```
 
 ## Editing
 
