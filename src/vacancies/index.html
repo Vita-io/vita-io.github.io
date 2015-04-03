@@ -25,7 +25,7 @@ class: vacancies
   {% assign sorted_vacancies = (site.vacancies | sort: 'order') %}
   {% for vacancy in sorted_vacancies %}
     {% if vacancy.publish == true %}
-      {% include {{vacancy.layout}}.html vacancy=vacancy %}
+      {{ vacancy.output }}
     {% endif %}
   {% endfor %}
   </ol>

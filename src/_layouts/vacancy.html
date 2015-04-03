@@ -1,10 +1,10 @@
-<li class="vacancy-item medium-12 small-11" id="{{include.vacancy.section-id}}">
+<li class="vacancy-item medium-12 small-11" id="{{page.section-id}}">
   <article class="vacancy">
-    <input id="vacancy-{{include.vacancy.order}}" name="vacancy" type="radio" class="accordeon-btn">
+    <input id="vacancy-{{page.order}}" name="vacancy" type="radio" class="accordeon-btn">
     <header>
-      <label for="vacancy-{{include.vacancy.order}}">
+      <label for="vacancy-{{page.order}}">
         <h3 class="vacancy-head header" itemprop="title">
-          <span class="title">{{include.vacancy.title}}</span>
+          <span class="title">{{page.title}}</span>
           <div class="arrow">
             <svg width="26px" height="13px" viewBox="0 0 26 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
               <path fill="none" stroke="#F7F8F8" stroke-width="3" d="M23.937,1.725l-6.988,6.989c-2.205,2.204-5.781,2.204-7.985,0L1.975,1.725" />
@@ -15,7 +15,7 @@
     </header>
 
     <section class="vacancy-content content medium-10 small-12 medium-offset-1" itemprop="description">
-      {{ include.vacancy.content }}
+      {{ page.content }}
       <span class="vacancy-contact">Interested? Please send Robert an email via <a href="mailto:{{site.vacancyEmail}}" class="button small highlight">{{site.vacancyEmail}}</a></span>
     </section>
   </article>

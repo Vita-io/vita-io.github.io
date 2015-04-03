@@ -338,7 +338,7 @@ function getCSSProp (elm, prop) {
   var form = document.getElementById("download-press"),
       errorTimer = null;
   var validateForm = function (evt) {
-    console.log('validate form',document.getElementById("EMAIL").value, isValidEmail(document.getElementById("EMAIL").value));
+    //console.log('validate form',document.getElementById("EMAIL").value, isValidEmail(document.getElementById("EMAIL").value));
     evt.preventDefault();
 
     if (isValidEmail(document.getElementById("EMAIL").value)) {
@@ -396,7 +396,6 @@ function getCSSProp (elm, prop) {
           content.style.height = 0;
 
           radioBtn.openAccordeon = function () {
-            console.log("change", radioBtn);
             if (prev) {
               accordeonContent(prev).style.height = 0;
             }
