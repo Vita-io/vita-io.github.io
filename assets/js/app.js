@@ -130,17 +130,19 @@ function getCSSProp (elm, prop) {
 	html.classList.add("js");
 
 	//init skrollr
-	var s = window.skrollr.init({
-		smoothScrolling: true,
-		smoothScrollingDuration: 200,
-		forceHeight: false,
-		keyframe: function(slide3, datacenter) {
-			var count  = new countUp("counter-1", 0, 93, 0, 2, null),
-          count2 = new countUp("counter-2", 0, 15, 0, 1, null);
-			count.start(null);
-			count2.start(null);
-    }
-	});
+  var count  = new countUp("counter-1", 0, 93, 0, 2, null),
+      count2 = new countUp("counter-2", 0, 15, 0, 1, null),
+	    s = window.skrollr.init({
+        		smoothScrolling: true,
+        		smoothScrollingDuration: 200,
+        		forceHeight: false,
+        		keyframe: function(slide3, datacenter) {
+              count.reset(null);
+              count2.reset(null);
+        			count.start(null);
+        			count2.start(null);
+            }
+        	});
 
 	//vars
 	var wHeight   = window.innerHeight,
