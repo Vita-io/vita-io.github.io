@@ -2,8 +2,9 @@
 title: Vita.io
 email: info@vita.io
 description: Homepage of Vita.IO
-baseurl: "/vita-io" # the subpath of your site, e.g. /blog/
+baseurl: "/" #"/vita-io" # the subpath of your site, e.g. /blog/
 url: "http://vita.io" # the base hostname & protocol for your site
+vacancyEmail: apply@vita.io
 
 contact:
   address: Heer Bokelweg 155

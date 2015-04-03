@@ -32,6 +32,6 @@ Folder overview:
 - `src/`:
   - texts, like vacancies
   - templaces
-  - generated assets (css, js, images, svg) -> * DON'T EDIT THESE HERE, BUT IN `assets/`
+  - generated assets (css, js, images, svg) -> *DON'T EDIT THESE HERE, BUT IN `assets/`*
 - `assets/`: source assets; these will be optimized by gulp
 - `_site/`: generated jekyll files; never modify this folder
