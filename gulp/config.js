@@ -1,5 +1,5 @@
 var gutil         = require('gulp-util');
-var jekyllSrc     = './src';
+var jekyllSrc     = '.';
 var assets        = './assets';
 var jekyllOutput  = './_site';
 var bower         = './bower_components';
@@ -30,15 +30,15 @@ module.exports = {
     dest:   jekyllOutput,
     config: '_config.yml',
     watch: [
-      '_config.yml',
-      '_config.build.yml',
-      jekyllSrc + '/_data/**/*.{json,yml,csv}',
-      jekyllSrc + '/_includes/**/*.{html,xml}',
-      jekyllSrc + '/_layouts/*.html',
-      jekyllSrc + '/_plugins/*.rb',
-      jekyllSrc + '/_posts/*.{markdown,md}',
-      jekyllSrc + '/**/*.{html,markdown,md,yml,json,txt,xml}',
-      jekyllSrc + '/**/*.{js,css,png,jpg,jpeg,gif,svg}'
+       '_config.yml'
+      ,'_config.build.yml'
+      ,jekyllSrc + '/_data/**/*.{json,yml,csv}'
+      ,jekyllSrc + '/_includes/**/*.{html,xml}'
+      ,jekyllSrc + '/_layouts/*.html'
+      ,jekyllSrc + '/_*/**/*.{markdown,md,yml,json,txt,xml}'
+      ,jekyllSrc + '/img/*.{png,jpg,jpeg,gif,svg}'
+      ,jekyllSrc + '/css/*.css'
+      ,jekyllSrc + '/js/*.js'
     ]
   },
   delete: {
