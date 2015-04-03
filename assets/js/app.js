@@ -1,23 +1,24 @@
 // debouncing function from John Hann
 // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
 function debounce (func, threshold, execAsap) {
-    var timeout;
+  var timeout;
 
-    return function debounced () {
-        var obj = this, args = arguments;
-        function delayed () {
-            if (!execAsap)
-                func.apply(obj, args);
-            timeout = null;
-        };
+  return function debounced () {
+    var obj = this, args = arguments;
+    function delayed () {
+      if (!execAsap) {
+        func.apply(obj, args);
+      }
+      timeout = null;
+    }
 
-        if (timeout)
-            clearTimeout(timeout);
-        else if (execAsap)
-            func.apply(obj, args);
-
-        timeout = setTimeout(delayed, threshold || 100);
-    };
+    if (timeout) {
+      clearTimeout(timeout);
+    } else if (execAsap) {
+      func.apply(obj, args);
+    }
+    timeout = setTimeout(delayed, threshold || 100);
+  };
 }
 function smartResize (fn) {
   window.addEventListener('resize', debounce(fn, null, false), false);
@@ -25,12 +26,14 @@ function smartResize (fn) {
 
 // copied from http://stackoverflow.com/a/1045012
 function getOffset(elem) {
-  if(!elem) elem = this;
+  if(!elem) {
+    elem = this;
+  }
 
   var x = elem.offsetLeft,
       y = elem.offsetTop;
 
-  while (elem = elem.offsetParent) {
+  while ((elem = elem.offsetParent) !== null) {
     x += elem.offsetLeft;
     y += elem.offsetTop;
   }
@@ -42,9 +45,7 @@ function verticalScrollPos () {
   return window.pageYOffset || document.body.scrollTop;
 }
 function viewportHeight () {
-  return document.compatMode == "CSS1Compat"
-    ? document.documentElement.clientHeight
-    : document.body.clientHeight;
+  return document.compatMode == "CSS1Compat" ? document.documentElement.clientHeight : document.body.clientHeight;
 }
 function maxVerticalScroll () {
   return Math.max(0, document.body.scrollHeight - viewportHeight());
@@ -110,7 +111,7 @@ function isValidEmail (v) {
 //function isEven(n)   { return isNumber(n) && (Math.abs(n) % 2 == 0); }
 //function isOdd(n)    { return !isEven(n); }
 function isEven(n) {
-  return n % 2 == 0;
+  return n % 2 === 0;
 }
 
 //returning a (namespaced) svg object to jquery
@@ -177,13 +178,13 @@ function getCSSProp (elm, prop) {
       elm.setAttribute("data-" + (pos + 200 + delay), "opacity:0;top:50px");
       elm.setAttribute("data-" + (pos + 350 + delay), "opacity:1;top:0");
     }
-  }
+  };
 
   resizeElements();
 
   //resize events
   smartResize(function(){
-    wHeight = window.innerHeight,
+    wHeight = window.innerHeight;
     wWidth = window.innerWidth;
     resizeElements();
 
@@ -210,7 +211,7 @@ function getCSSProp (elm, prop) {
       elm.setAttribute("data--100-top-bottom",  "opacity:0.1");
       elm.setAttribute("data-smooth-scrolling", "off");
 
-      if (i == slidesLength) {
+      if (i === slidesLength) {
         elm.setAttribute("data--200-center",    "opacity:1");
         elm.setAttribute("data--200-top",       "opacity:1");
       }
@@ -228,11 +229,11 @@ function getCSSProp (elm, prop) {
 
     var switchWord = function () {
       wordElms[curWord].classList.remove("active");
-      if (++curWord == wordsList.length) {
+      if (++curWord === wordsList.length) {
         curWord = 0;
       }
       wordElms[curWord].classList.add("active");
-    }
+    };
     setInterval(switchWord, 2400);
 
     //
@@ -284,10 +285,10 @@ function getCSSProp (elm, prop) {
 
       var addNavItem = function (targetID, disableOnPos, enableOnPos) {
         wrapper.innerHTML = '<li class="nav-item"><a href="#'+targetID+'" class="nav-item-link"'
-                              + (disableOnPos != null ? 'data-'+disableOnPos+'="background:transparent"' : '')
-                              + (enableOnPos  != null ? 'data-'+enableOnPos+'="background:#fff"></a></li>' : '');
+                              + (disableOnPos !== null ? 'data-'+disableOnPos+'="background:transparent"' : '')
+                              + (enableOnPos  !== null ? 'data-'+enableOnPos+'="background:#fff"></a></li>' : '');
         fixedNav.appendChild(wrapper.firstChild);
-      }
+      };
 
       //top-opening
       addNavItem('top-opening', null, -1);
@@ -356,7 +357,7 @@ function getCSSProp (elm, prop) {
       }, 3000);
     }
     return false;
-  }
+  };
   if (form) {
     form.addEventListener('submit', validateForm, false);
   }
@@ -377,7 +378,7 @@ function getCSSProp (elm, prop) {
 
   var accordeonContent = function (radioBtn) {
     return radioBtn.parentNode.querySelector(".content");
-  }
+  };
 
   var accordeons = document.querySelectorAll(".accordeon");
   for (var i = 0, elm; elm = accordeons[i]; i++) {
@@ -413,7 +414,7 @@ function getCSSProp (elm, prop) {
 
   if (document.body.classList.contains("vacancies")) {
     var hash = window.location.hash.toLowerCase();
-    if (hash != "") {
+    if (hash !== "") {
       setTimeout(function() {
         var radioBtn = document.querySelector(hash + " .accordeon-btn");
         if (radioBtn) {
