@@ -2,7 +2,7 @@
 layout:     vacancy
 title:      "Server architect"
 section-id: "server-architect"
-publish:    true
+published:  true
 order:      2
 ---
 #### What you tell your friends you're doing at work

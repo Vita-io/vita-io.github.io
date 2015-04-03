@@ -2,7 +2,7 @@
 layout:     vacancy
 title:      "Sentiment data expert"
 section-id: "sentiment-data-expert"
-publish:    true
+published:  true
 order:      3
 ---
 #### What you tell your friends you're doing at work

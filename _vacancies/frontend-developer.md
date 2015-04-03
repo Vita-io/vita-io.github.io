@@ -2,7 +2,7 @@
 layout:     vacancy
 title:      "Front-end developer"
 section-id: "front-end-developer"
-publish:    true
+published:  true
 order:      1
 ---
 #### What you tell your friends you're doing at work

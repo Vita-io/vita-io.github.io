@@ -24,7 +24,7 @@ class: vacancies
   <ol class="vacancy-list accordeon" itemscope itemtype="http://schema.org/JobPosting">
   {% assign sorted_vacancies = (site.vacancies | sort: 'order') %}
   {% for vacancy in sorted_vacancies %}
-    {% if vacancy.publish == true %}
+    {% if vacancy.published == true %}
       {{ vacancy.output }}
     {% endif %}
   {% endfor %}

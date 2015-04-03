@@ -2,7 +2,7 @@
 layout:     vacancy
 title:      "Data expert"
 section-id: "data-expert"
-publish:    true
+published:  true
 order:      4
 ---
 #### What you tell your friends you're doing at work
