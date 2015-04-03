@@ -88,6 +88,21 @@ class: home
       </div>
     </hgroup>
   </div>
+
+  <svg id="top-plx-container" viewBox="0 0 100 300" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <linearGradient id="gradientBlack" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="black" stop-opacity="0" />
+        <stop offset="0.3" stop-color="black" stop-opacity="1" />
+        <stop offset="1" stop-color="black" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient id="gradientBlue" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#95d3db" stop-opacity="1" />
+        <stop offset="0.7" stop-color="#95d3db" stop-opacity="1" />
+        <stop offset="1" stop-color="#95d3db" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+  </svg>
 </header>
 
         <section id="slide-1" class="row slide" data-scroll-dur="1800">
@@ -871,9 +886,9 @@ creates happy people that love their job.</strong>
           <form id="download-press" action="http://vita.us4.list-manage.com/subscribe/post" method="post" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
             <input type="hidden" name="u" value="4572eec4bd5fb12cbfca69651">
             <input type="hidden" name="id" value="54d4b62cba">
-            <span class="button-group">
-              <input type="text" name="EMAIL" id="EMAIL" placeholder="enter your email to" class="button-group-element medium-6 small-6" required />
-              <button type="submit" class="button-group-element button secondary checkInput medium-6 small-6">
+            <span class="button-group large-9 medium-12 small-12">
+              <input type="text" name="EMAIL" id="EMAIL" placeholder="enter your email to" class="button-group-element large-7 medium-8 small-6" required />
+              <button id="email-btn" type="submit" class="button-group-element button secondary checkInput large-5 medium-4 small-6">
                 <span id="subscribe">subscribe</span>
                 <span id="email-error" class="hidden">Please provide a valid email</span>
               </button>

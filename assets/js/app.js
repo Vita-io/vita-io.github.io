@@ -62,8 +62,8 @@ function stopAnimatedScroll () {
 }
 
 function scrollAnimatedTo (targetY) {
-  var targetY = Math.round(targetY),
-      targetInc = targetY * scrollFilter;
+  targetY = Math.round(targetY);
+  var targetInc = targetY * scrollFilter;
 
   // stop previous animation
   stopAnimatedScroll();
@@ -233,8 +233,9 @@ function getCSSProp (elm, prop) {
     //
   	// remove image placeholder
     //
-    wrapper.innerHTML = '<svg id="top-plx-container" viewBox = "0 0 '+wWidth+' 300" xmlns="http://www.w3.org/2000/svg" version = "1.1"><linearGradient id="gradient-black" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="black" stop-opacity="0" /><stop offset="0.3" stop-color="black" stop-opacity="1" /><stop offset="1" stop-color="black" stop-opacity="1" /></linearGradient><linearGradient id="gradient-blue" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#95d3db" stop-opacity="1" /><stop offset="0.7" stop-color="#95d3db" stop-opacity="1" /><stop offset="1" stop-color="#95d3db" stop-opacity="0" /></linearGradient></svg>';
-    var svgContainer = wrapper.firstChild;
+    //wrapper.innerHTML = '<svg id="top-plx-container" viewBox = "0 0 '+wWidth+' 300" xmlns="http://www.w3.org/2000/svg" version = "1.1"><linearGradient id="gradient-black" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="black" stop-opacity="0" /><stop offset="0.3" stop-color="black" stop-opacity="1" /><stop offset="1" stop-color="black" stop-opacity="1" /></linearGradient><linearGradient id="gradient-blue" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#95d3db" stop-opacity="1" /><stop offset="0.7" stop-color="#95d3db" stop-opacity="1" /><stop offset="1" stop-color="#95d3db" stop-opacity="0" /></linearGradient></svg>';
+    var svgContainer = document.getElementById("top-plx-container"); //wrapper.firstChild;
+    svgContainer.setAttribute('viewBox', '0 0 '+wWidth+' 300');
     topOpening.appendChild(svgContainer);
     topOpening.classList.add("js");
 
@@ -242,22 +243,21 @@ function getCSSProp (elm, prop) {
         objH    = 80,
         rot     = -15,
         borderR = "100px",
-        offset  = 273,
-        l       = (wWidth / (objW / 3));
+        offset  = 273;
 
-    for (var i = 0; i <= l; i++) {
+    for (var i = 0, l = Math.ceil(wWidth / (objW / 3)); i <= l; i++) {
       var line = createSVG("path");
 
       if (isEven(i)) {
         line.setAttribute('data-0',    '@d:M' + (-200 + (offset * i)) + ',200 L' + (-200 + (offset * i)) + ',200');
         line.setAttribute('data-100',  '@d:M' + (-200 + (offset * i)) + ',200 L' + (150  + (offset * i)) + ',100');
         line.setAttribute('data-700',  '@d:M' + (-200 + (offset * i)) + ',200 L' + (350  + (offset * i)) + ',42');
-        line.setAttribute('stroke', "url(#gradient-blue)");
+        line.setAttribute('stroke', "url(#gradientBlue)");
       } else {
         line.setAttribute('data-0',    '@d:M' + (150 + (offset * i)) + ',100 L' + (150   + (offset * i)) + ',100');
         line.setAttribute('data-100',  '@d:M' + (150 + (offset * i)) + ',100 L' + (-200  + (offset * i)) + ',200');
         line.setAttribute('data-1000', '@d:M' + (150 + (offset * i)) + ',100 L' + (-400  + (offset * i)) + ',250');
-        line.setAttribute('stroke', "url(#gradient-black)");
+        line.setAttribute('stroke', "url(#gradientBlack)");
       }
 
       line.setAttribute('d', 'M' + (-200 + (offset * i)) + ',200 L' + (150 + (offset * i)) + ',100');

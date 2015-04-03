@@ -201,20 +201,38 @@ button[type="submit"]:hover{
 
 a.button{ text-decoration: none; }
 
-.button-group .button-group-element:first-child{
-  display: inline-block;
-  border-radius: 100px 0 0 100px;
-  margin-right: -4px;
-  top: -5px;
+.button-group {
+  display: block;
   position: relative;
-}
-.button-group .button-group-element:last-child{
-  display: inline-block;
-  border-radius: 0 100px 100px 0;
-  margin-left: -3px;
   height: 62px;
-  position: relative;
+  margin: 0 auto;
+  @include clearfix;
+
+  .button-group-element {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    margin: 0;
+    float: left;
+
+    &:first-child{
+      border-radius: 100px 0 0 100px;
+      margin-right: -4px;
+      //top: -5px;
+    }
+
+    &:last-child{
+      border-radius: 0 100px 100px 0;
+      margin-left: -3px;
+    }
+  }
+
+  #email-btn {
+    //max-width: 290px;
+    padding: 15px rem-calc(40);
+  }
 }
+
 #subscribe {
   letter-spacing: 0.08em;
   height: auto;
@@ -239,11 +257,6 @@ a.button{ text-decoration: none; }
     height: none;
     opacity: 0;
   }
-}
-
-.button-group .button-group-element.secondary{
-	max-width: 290px;
-	padding: 15px rem-calc(40);
 }
 
 ::-webkit-input-placeholder{
