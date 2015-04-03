@@ -75,11 +75,9 @@ module.exports = {
       compilerPath: 'bower_components/closure-compiler/compiler.jar',
       fileName: jekyllSrc + '/js/app.min.js',
       compilerFlags: {
-        compilation_level: 'ADVANCED_OPTIMIZATIONS', //'SIMPLE_OPTIMIZATIONS',
-        //externs: closureLibs,
-        //output_wrapper: '(function(){%output%})();',
-        process_jquery_primitives: true
+        compilation_level: 'SIMPLE_OPTIMIZATIONS' // 'ADVANCED_OPTIMIZATIONS'
         ,warning_level: 'VERBOSE'
+        //,formatting: "PRETTY_PRINT"
       },
       maxBuffer: 100000
     }

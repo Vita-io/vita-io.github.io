@@ -160,7 +160,9 @@ function getCSSProp (elm, prop) {
       words        = document.querySelector("#slogan #words");
 
   var resizeElements = function () {
-    topOpening.style.height = (wHeight*1.1) + "px";
+    if (topOpening) {
+      topOpening.style.height = (wHeight*1.1) + "px";
+    }
 
     for (var i = 0, elm; elm = spacedItems[i]; i++) {
       elm.style.margin = wWidth < 960 ? 0 : (topOpening.offsetHeight * 0.04) + "px";
