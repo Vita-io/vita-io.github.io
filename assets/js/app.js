@@ -127,33 +127,33 @@ function getCSSProp (elm, prop) {
 // no need to wait until the document is loaded since the script is already at the bottom of the page
 (function() {
   var html = document.body.parentElement;
-	html.classList.add("js");
+  html.classList.add("js");
 
-	//init skrollr
+  //init skrollr
   var count  = new countUp("counter-1", 0, 93, 0, 2, null),
       count2 = new countUp("counter-2", 0, 15, 0, 1, null),
-	    s = window.skrollr.init({
-        		smoothScrolling: true,
-        		smoothScrollingDuration: 200,
-        		forceHeight: false,
-        		keyframe: function(slide3, datacenter) {
+      s = window.skrollr.init({
+            smoothScrolling: true,
+            smoothScrollingDuration: 200,
+            forceHeight: false,
+            keyframe: function(slide3, datacenter) {
               count.reset(null);
               count2.reset(null);
-        			count.start(null);
-        			count2.start(null);
+              count.start(null);
+              count2.start(null);
             }
-        	});
+          });
 
-	//vars
-	var wHeight   = window.innerHeight,
-		  wWidth    = window.innerWidth,
-		  wordsList = ['people','place','time'],
-		  curWord   = wordsList.length - 1;
+  //vars
+  var wHeight   = window.innerHeight,
+      wWidth    = window.innerWidth,
+      wordsList = ['people','place','time'],
+      curWord   = wordsList.length - 1;
 
-	//jquery vars
-	var	topOpening   = document.querySelector("#top-opening"),
-	    logo         = document.querySelector("#top-opening #logo"),
-	    spacedItems  = document.querySelectorAll(".space-relative"),
+  //jquery vars
+  var topOpening   = document.querySelector("#top-opening"),
+      logo         = document.querySelector("#top-opening #logo"),
+      spacedItems  = document.querySelectorAll(".space-relative"),
       slides       = document.querySelectorAll(".slide"),
       scrollFadeIn = document.querySelectorAll(".scroll-fadein"),
       words        = document.querySelector("#slogan #words");
@@ -187,16 +187,16 @@ function getCSSProp (elm, prop) {
     wWidth = window.innerWidth;
     resizeElements();
 
-		//skrollr refresh datapoints
-		s.refresh();
-	});
+    //skrollr refresh datapoints
+    s.refresh();
+  });
 
 
   //
-	// HOME
+  // HOME
   //
 
-	if (document.body.classList.contains("home")) {
+  if (document.body.classList.contains("home")) {
     //
     // rotate highlighted words
     //
@@ -236,7 +236,7 @@ function getCSSProp (elm, prop) {
     setInterval(switchWord, 2400);
 
     //
-  	// remove image placeholder
+    // remove image placeholder
     //
     //wrapper.innerHTML = '<svg id="top-plx-container" viewBox = "0 0 '+wWidth+' 300" xmlns="http://www.w3.org/2000/svg" version = "1.1"><linearGradient id="gradient-black" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="black" stop-opacity="0" /><stop offset="0.3" stop-color="black" stop-opacity="1" /><stop offset="1" stop-color="black" stop-opacity="1" /></linearGradient><linearGradient id="gradient-blue" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#95d3db" stop-opacity="1" /><stop offset="0.7" stop-color="#95d3db" stop-opacity="1" /><stop offset="1" stop-color="#95d3db" stop-opacity="0" /></linearGradient></svg>';
     var svgContainer = document.getElementById("top-plx-container"); //wrapper.firstChild;
@@ -300,10 +300,10 @@ function getCSSProp (elm, prop) {
     }
   }
 
-	//fading scroll animation
-	var faders = document.querySelectorAll('.fader'),
-		faderStart = 200,
-		faderOffset = -30;
+  //fading scroll animation
+  var faders = document.querySelectorAll('.fader'),
+    faderStart = 200,
+    faderOffset = -30;
 
   for (var i = 0, elm; elm = faders[i]; i++) {
     var data = faderStart + (faderOffset * (i + 1));
@@ -312,7 +312,7 @@ function getCSSProp (elm, prop) {
     elm.setAttribute('data-' + (data - 300) + '-center', '@opacity:0;transform:translateY(-60px)');
   }
 
-	//bubbles scroll animation UNUSED?
+  //bubbles scroll animation UNUSED?
   /*var bubbles = document.querySelectorAll('.bubble'),
     bubbleStart = 200,
     bubbleOffset = 30,
@@ -325,11 +325,11 @@ function getCSSProp (elm, prop) {
     elm.setAttribute('data-' + (data - 300) + '-center', '@opacity:0;transform:translateY(-60px)');
   }*/
 
-	//all done, refresh skrollr
-	s.refresh();
+  //all done, refresh skrollr
+  s.refresh();
 
   //
-	// email validation
+  // email validation
   //
 
   var form = document.getElementById("download-press"),
