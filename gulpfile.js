@@ -1,4 +1,5 @@
 var gutil      = require('gulp-util');
+var runSequence= require('run-sequence');
 
 var src           = './src';
 var output        = '.';
@@ -7,6 +8,15 @@ var jekyllOutput  = './_site';
 
 global.production = gutil.env._[0] === 'release';
 
+// order of build tasks; remove the tasks you don't want
+var defaultTasks  = [
+  'svg'
+ ,'sass'
+ ,'mergeJS'
+ ,'resizeImages'
+ ,'compressImages'
+ ,'jekyll'
+];
 
 global.config = {
   // remove to disable browserSync support
@@ -18,18 +28,13 @@ global.config = {
     files: [jekyllOutput + "/**"]
   },
 
-  // order of build tasks; remove the tasks you don't want
-  build: [
-    'delete'
- //,'copy'
-   ,'svg'
-   ,'sass'
- //,'iconFont'
-   ,'mergeJS'
-   ,'resizeImages'
-   ,'compressImages'
-   ,'jekyll'
-  ],
+  defaultTasks: defaultTasks,
+  build: function(cb) {
+    runSequence(
+      'delete'
+     ,defaultTasks
+     ,cb);
+  },
   // order of release tasks; remove the tasks you don't want
   release: [
     'build'
@@ -61,7 +66,7 @@ global.config.tasks = []; // will store configuration per task
 //
 
 global.config.tasks.resizeImages = {
-  deps: ['delete'],
+  deps: [],
   reloadPage: false,
 
   src: src + "/img/resize/**",
@@ -79,7 +84,7 @@ global.config.tasks.resizeImages = {
 //
 
 // global.config.tasks.iconFont = {
-//   deps: ['delete'],
+//   deps: [],
 //   reloadPage: true,
 //   src: src + "/fonts/*.svg",
 //   dest: output + "/fonts/",
@@ -101,11 +106,11 @@ global.config.tasks.resizeImages = {
 //
 
 global.config.tasks.mergeJS = {
-  deps: ['delete'],
+  deps: [],
   reloadPage: true,
 
   src: [src + '/js/module.js', bower + '/countUp/countUp.js', bower + '/skrollr/src/skrollr.js', src + '/js/app.js'],
-  bundleName: "app.js",
+  bundleName: "app.min.js",
   dest: output + "/js/"
 };
 
@@ -116,7 +121,7 @@ global.config.tasks.mergeJS = {
 //
 
 global.config.tasks.svg = {
-  deps: ['delete'],
+  deps: [],
   reloadPage: false,
 
   src: src + "/img/**/*.svg",
@@ -151,7 +156,7 @@ var browsers = ['ie >= 9',
                 ];
 
 global.config.tasks.sass = {
-  deps: ['delete'],
+  deps: [],
   reloadPage: false,
 
   src: src + "/sass/**/*.{scss,sass}",
@@ -213,7 +218,7 @@ global.config.tasks.compressCSS = {
 //
 
 global.config.tasks.compressHTML = {
-  deps: ['delete'],
+  deps: [],
   reloadPage: true,
 
   src: [src + "/**/*.html"],
@@ -228,10 +233,10 @@ global.config.tasks.compressHTML = {
 //
 
 global.config.tasks.compressJS = {
-  deps: ['delete', 'mergeJS'],
+  deps: ['mergeJS'],
   reloadPage: true,
 
-  src: [output + "/js/app.js"],
+  src: [output + "/js/app.min.js"],
   dest: output + "/js",
   settings: {
     compilerPath: bower + '/closure-compiler/compiler.jar',
@@ -252,7 +257,7 @@ global.config.tasks.compressJS = {
 //
 
 global.config.tasks.compressImages = {
-  deps: ['delete'],
+  deps: [],
   reloadPage: false,
 
   src:  src + "/img/*.{png,jpg,jpeg,gif}",
@@ -272,9 +277,7 @@ global.config.tasks.compressImages = {
 //
 
 global.config.tasks.jekyll = {
-  deps: !global.production
-          ? ['delete', 'svg', 'sass', 'mergeJS', 'resizeImages', 'compressImages']
-          : ['delete', 'svg', 'sass', 'mergeJS', 'resizeImages', 'compressImages', 'compressJS', 'compressHTML'],
+  deps: [],
   reloadPage: false,
 
   src:    output,
