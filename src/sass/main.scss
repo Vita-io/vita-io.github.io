@@ -652,10 +652,7 @@ html.js #learn-more{
 
 .blink-circle{
 
-	transform-origin: 52px 52px;
-	-moz-transform-origin: 52px 52px; //tranform origin not parsed right in mozilla for some reason, so using px value
-	-webkit-transform-origin: center center;
-
+	transform-origin: 52px 52px; //tranform origin center center not parsed right in mozilla for some reason, so using px value
 	-webkit-transform: scale(0);
 	opacity: 0;
 
