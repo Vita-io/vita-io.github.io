@@ -55,7 +55,8 @@ function maxVerticalScroll () {
 var scrollInterval = null,
     fps            = 60,
     frameTime      = 1000 / fps,
-    scrollFilter   = 0.2;
+    scrollFilter   = 0.15,
+    prevDiff       = null;
 
 function stopAnimatedScroll () {
   clearInterval(scrollInterval);
@@ -75,11 +76,13 @@ function scrollAnimatedTo (targetY) {
     var curY = verticalScrollPos(),
         diff = curY - targetY;
 
-    if (Math.abs(diff) <= 2) {
+    if (diff == prevDiff || Math.abs(diff) <= 2) {
       stopAnimatedScroll();
       window.scroll(0, targetY);
+      prevDiff = null;
     } else {
       window.scroll(0, Math.round((curY * (1 - scrollFilter)) + targetInc));
+      prevDiff = diff;
     }
   }, frameTime);
 }
